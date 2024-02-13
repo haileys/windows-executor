@@ -118,15 +118,15 @@ unsafe extern "system" fn wnd_proc<Msg: FromMessage>(
     wparam: WPARAM,
     lparam: LPARAM,
 ) -> LRESULT {
-    let Some(inner) = get_inner_ptr(hwnd) else {
-        return DefWindowProcW(hwnd, msg, wparam, lparam);
-    };
-
     if msg == WM_CREATE {
         let params = &*(lparam as *const CREATESTRUCTW);
         let ptr = InnerPtr::<Msg>::new(params.lpCreateParams.cast());
         swap_inner_ptr(hwnd, ptr);
     }
+
+    let Some(inner) = get_inner_ptr(hwnd) else {
+        return DefWindowProcW(hwnd, msg, wparam, lparam);
+    };
 
     let Some(message) = Msg::from_message(hwnd, msg, wparam, lparam) else {
         return DefWindowProcW(hwnd, msg, wparam, lparam);
