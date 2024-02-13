@@ -1,6 +1,5 @@
-#![cfg_attr(not(test), no_std)]
-
 mod waker;
+pub mod sync;
 
 use core::future::Future;
 use core::mem::MaybeUninit;
