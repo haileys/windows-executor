@@ -2,6 +2,10 @@
 name = "windows-executor"
 version = "0.2.0"
 edition = "2021"
+description = "Windows message loop driven async executor"
+license = "MIT"
+documentation = "https://docs.rs/windows-executor"
+repository = "https://github.com/haileys/windows-executor"
 
 [dependencies]
 futures = { version = "0.3.30", default-features = false }
